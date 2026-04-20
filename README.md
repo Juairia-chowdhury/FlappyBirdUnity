@@ -101,7 +101,6 @@ FlappyBird/
 
 * 🌇 Sunset gradient effect
 * 🌧 Rain system
-* ✨ Twinkling stars animation
 * 🔊 Sound effects
 * 📱 Mobile-friendly version
 
