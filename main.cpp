@@ -22,33 +22,39 @@ float transition = 0.0f;   // 0 = day, 1 = night
 bool isNight = false;
 bool isTransitioning = false;
 
-struct Star {
+struct Star
+{
     float x, y;
 };
 Star stars[maxStars];
 
 // Draw text
-void drawText(float x, float y, const char* text) {
+void drawText(float x, float y, const char* text)
+{
     glRasterPos2f(x, y);
-    for (int i = 0; text[i] != '\0'; i++) {
+    for (int i = 0; text[i] != '\0'; i++)
+    {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
     }
 }
 
-void drawBackground() {
+void drawBackground()
+{
     // Clouds
     glColor3f(1.0 * (1 - transition),
               1.0 * (1 - transition),
               1.0 * (1 - transition));
 
     // Cloud 1
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)
+    {
         float cx = 0.6 + i * 0.07;
         float cy = 0.6;
         float r = 0.05;
         glBegin(GL_TRIANGLE_FAN);
         glVertex2f(cx, cy);
-        for (int j = 0; j <= 50; j++) {
+        for (int j = 0; j <= 50; j++)
+        {
             float angle = 2 * M_PI * j / 50;
             glVertex2f(cx + r * cos(angle), cy + r * sin(angle));
         }
@@ -56,13 +62,15 @@ void drawBackground() {
     }
 
     // Cloud 2
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)
+    {
         float cx = 0.7 + i * 0.06;
         float cy = 0.5;
         float r = 0.04;
         glBegin(GL_TRIANGLE_FAN);
         glVertex2f(cx, cy);
-        for (int j = 0; j <= 50; j++) {
+        for (int j = 0; j <= 50; j++)
+        {
             float angle = 2 * M_PI * j / 50;
             glVertex2f(cx + r * cos(angle), cy + r * sin(angle));
         }
@@ -71,12 +79,14 @@ void drawBackground() {
 
     // Sun
     float sx = 0.7, sy = 0.75;
-    for (int k = 3; k >= 1; k--) {
+    for (int k = 3; k >= 1; k--)
+    {
         float glowR = 0.08 + k * 0.02;
         glColor4f(1.0, 0.9, 0.0, 0.2 * (1 - transition));
         glBegin(GL_TRIANGLE_FAN);
         glVertex2f(sx, sy);
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 0; i <= 100; i++)
+        {
             float angle = 2 * M_PI * i / 100;
             glVertex2f(sx + glowR * cos(angle), sy + glowR * sin(angle));
         }
@@ -89,7 +99,8 @@ void drawBackground() {
     float r = 0.08;
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(sx, sy);
-    for (int i = 0; i <= 100; i++) {
+    for (int i = 0; i <= 100; i++)
+    {
         float angle = 2 * M_PI * i / 100;
         glVertex2f(sx + r * cos(angle), sy + r * sin(angle));
     }
@@ -99,7 +110,8 @@ void drawBackground() {
     glColor4f(transition, transition, 0.6 * transition, transition);
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(sx, sy);
-    for (int i = 0; i <= 100; i++) {
+    for (int i = 0; i <= 100; i++)
+    {
         float angle = 2 * M_PI * i / 100;
         glVertex2f(sx + r * cos(angle), sy + r * sin(angle));
     }
@@ -109,13 +121,14 @@ void drawBackground() {
     glColor4f(0.05, 0.05, 0.2, transition);
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(sx + 0.03, sy);
-    for (int i = 0; i <= 100; i++) {
+    for (int i = 0; i <= 100; i++)
+    {
         float angle = 2 * M_PI * i / 100;
         glVertex2f(sx + 0.03 + r * cos(angle), sy + r * sin(angle));
     }
     glEnd();
 
-    // Grass
+   // 🌱 Grass (green strip)
     glColor3f(0.2, 0.8, 0.2);
     glBegin(GL_QUADS);
     glVertex2f(-1, -0.8);
@@ -124,6 +137,34 @@ void drawBackground() {
     glVertex2f(-1, -0.9);
     glEnd();
 
+    // 🌾 Grass spikes (small triangles)
+    glColor3f(0.1, 0.6, 0.1);
+    for (float x = -1; x < 1; x += 0.05)
+    {
+        glBegin(GL_TRIANGLES);
+        glVertex2f(x, -0.8);
+        glVertex2f(x + 0.02, -0.75);
+        glVertex2f(x + 0.04, -0.8);
+        glEnd();
+    }
+// 🌼 Flowers
+    for (float x = -0.9; x < 1; x += 0.2)
+    {
+                                    // Yellow center
+        glColor3f(1.0, 1.0, 0.0);
+        glBegin(GL_TRIANGLE_FAN);
+        float r = 0.01;
+        float cx = x;
+        float cy = -0.85;
+
+        glVertex2f(cx, cy);
+        for (int i = 0; i <= 20; i++)
+        {
+            float angle = 2 * 3.1416 * i / 20;
+            glVertex2f(cx + r * cos(angle), cy + r * sin(angle));
+        }
+        glEnd();
+    }
     // Soil
     glColor3f(0.5, 0.25, 0.1);
     glBegin(GL_QUADS);
@@ -132,12 +173,16 @@ void drawBackground() {
     glVertex2f(1, -1);
     glVertex2f(-1, -1);
     glEnd();
-}
 
-void drawStars() {
+}
+// ================= STARS ====================
+
+void drawStars()
+{
     glPointSize(2 + rand()%3);
     glBegin(GL_POINTS);
-    for (int i = 0; i < maxStars; i++) {
+    for (int i = 0; i < maxStars; i++)
+    {
         float brightness = (rand()%100)/100.0f;
         glColor3f(brightness, brightness, brightness);
         glVertex2f(stars[i].x, stars[i].y);
@@ -145,18 +190,9 @@ void drawStars() {
     glEnd();
 }
 
-// Bird, Pipe, Display, Update, Keyboard, Init, Main
-// (unchanged from your version except blending fix)
-
-
-
-// ================= STARS ====================
-
-
 // 🐦 Draw bird (circle instead of square)
 void drawBird()
 {
-
     // 🟡 Body (yellow circle)
     glColor3f(1.0, 0.85, 0.0);
     float r = 0.05;
@@ -308,7 +344,7 @@ void update(int value)
     {
 
         // slower gravity
-        velocity -= 0.0015;
+        velocity -= 0.0012;
         birdY += velocity;
 
         // slower pipe movement
