@@ -48,9 +48,10 @@ This project demonstrates basic computer graphics concepts like rendering, anima
 
 ## 📸 Screenshots
 
-*<img width="1920" height="1012" alt="Screenshot (1054)" src="https://github.com/user-attachments/assets/826ecbc1-61c6-4af8-a771-bdb01ef31be3" />
-<img width="1909" height="1010" alt="Screenshot (1055)" src="https://github.com/user-attachments/assets/c094b1c2-f3a9-4bbb-a81a-8dffbde5b6e8" />
-<img width="1920" height="1010" alt="Screenshot (1056)" src="https://github.com/user-attachments/assets/c131d6c3-24cc-41dd-a30a-edcac728be9c" /> *
+<img width="1920" height="1003" alt="Screenshot (1058)" src="https://github.com/user-attachments/assets/11d62975-cc88-4f0f-8f58-db871bf58c96" />
+<img width="1905" height="1012" alt="Screenshot (1059)" src="https://github.com/user-attachments/assets/36347bb3-528b-4b4d-80d9-0f43479bb062" />
+<img width="1914" height="1013" alt="Screenshot (1061)" src="https://github.com/user-attachments/assets/ea1d272c-712f-4866-a286-228234e22b82" />
+
 
 ---
 
