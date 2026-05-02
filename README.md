@@ -98,13 +98,4 @@ FlappyBird/
 
 ---
 
-## 🎯 Future Improvements
-
-* 🌇 Sunset gradient effect
-* 🌧 Rain system
-* 🔊 Sound effects
-* 📱 Mobile-friendly version
-
----
-
 
